@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchSignUp(View v) {
         //launch a new screen
-
         Intent i = new Intent(this, SignUpScreen.class);
         startActivity(i);
     }

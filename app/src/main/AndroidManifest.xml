@@ -19,6 +19,7 @@
             android:theme="@style/Theme.FitRec" />
         <activity
             android:name=".MainActivity"
+            android:label="FitRec"
             android:exported="true"
             android:theme="@style/Theme.FitRec" >
             <intent-filter>

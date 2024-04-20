@@ -15,5 +15,8 @@
     <string name="text_4">Join Us!</string>
     <string name="text_5">Enter an email and create a password to sign up:</string>
     <string name="text_6">Submit</string>
+    <string name="text_7">Email:</string>
+    <string name="text_8">Create a password:</string>
+    <string name="text_9">Reenter password:</string>
     <string name="lorem_ipsum">example</string>
 </resources>

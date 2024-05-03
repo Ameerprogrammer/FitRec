@@ -24,21 +24,24 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="151dp"
+        android:layout_height="38dp"
+        android:background="@drawable/button_outline"
         android:onClick="launchSignUp"
         android:text="@string/text_2"
         android:textColor="#3EB489"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401" />
+        app:layout_constraintVertical_bias="0.402" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="151dp"
+        android:layout_height="38dp"
+        android:background="@drawable/button_outline"
         android:text="@string/text_3"
         android:textColor="#3EB489"
         app:layout_constraintBottom_toBottomOf="parent"

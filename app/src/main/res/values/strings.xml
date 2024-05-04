@@ -24,5 +24,8 @@
     <string name="text_12">Email</string>
     <string name="text_13">Forgot password?</string>
     <string name="text_14">Not a member? Sign up</string>
+    <string name="text_15">Forgot your password?</string>
+    <string name="text_16">No problem!</string>
+    <string name="text_17">Enter your email to be sent a link to reset your password:</string>
     <string name="lorem_ipsum">example</string>
 </resources>

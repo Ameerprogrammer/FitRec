@@ -20,4 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignUpScreen.class);
         startActivity(i);
     }
+    public void launchLogin(View v) {
+        //launch a new screen
+        Intent i2 = new Intent(this, LoginScreen.class);
+        startActivity(i2);
+    }
 }

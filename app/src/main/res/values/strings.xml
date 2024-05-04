@@ -9,6 +9,7 @@
 
     <string name="title_activity_sign_up_screen">SignUpScreen</string>
     <string name="Welcome_1">Welcome!</string>
+    <string name="Welcome_2">Welcome Back!</string>
     <string name="text_1">Find your true self through fashion!</string>
     <string name="text_2">Sign Up</string>
     <string name="text_3">Log In</string>
@@ -18,5 +19,10 @@
     <string name="text_7">Email:</string>
     <string name="text_8">Create a password:</string>
     <string name="text_9">Reenter password:</string>
+    <string name="text_10">Sign in to get started:</string>
+    <string name="text_11">Password</string>
+    <string name="text_12">Email</string>
+    <string name="text_13">Forgot password?</string>
+    <string name="text_14">Not a member? Sign up</string>
     <string name="lorem_ipsum">example</string>
 </resources>

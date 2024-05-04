@@ -20,4 +20,9 @@ public class LoginScreen extends AppCompatActivity {
         Intent i3 = new Intent(this, ForgotPasswordScreen.class);
         startActivity(i3);
     }
+    public void launchSignUp(View v) {
+        //launch a new screen
+        Intent i4 = new Intent(this, SignUpScreen.class);
+        startActivity(i4);
+    }
 }

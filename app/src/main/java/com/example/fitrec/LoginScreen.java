@@ -25,4 +25,10 @@ public class LoginScreen extends AppCompatActivity {
         Intent i4 = new Intent(this, SignUpScreen.class);
         startActivity(i4);
     }
+
+    public void launchCreateProfiles(View v) {
+        //launch a new screen
+        Intent i7 = new Intent(this, CreateProfiles.class);
+        startActivity(i7);
+    }
 }

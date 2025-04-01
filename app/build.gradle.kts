@@ -69,4 +69,10 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+
+    // Add Retrofit dependencies
+    implementation(libs.retrofit)  // Retrofit library
+    implementation(libs.retrofit.gson)  // Gson converter
+    implementation(libs.okhttp)  // OkHttp for networking
+
 }

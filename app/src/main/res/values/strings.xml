@@ -31,5 +31,13 @@
     <string name="text_19">Complete the questions to get outfits recommended to you:</string>
     <string name="text_20">Complete</string>
     <string name="text_21">yes</string>
+    <string name="text_22">Your profile:</string>
+    <string name="text_23">Gender:</string>
+    <string name="text_24">Age:</string>
+    <string name="text_25">Body Type:</string>
+    <string name="text_26">Style:</string>
+    <string name="text_27">Occasion:</string>
+    <string name="text_28">Get Recommendations</string>
     <string name="lorem_ipsum">example</string>
+
 </resources>

@@ -38,6 +38,7 @@
     <string name="text_26">Style:</string>
     <string name="text_27">Occasion:</string>
     <string name="text_28">Get Recommendations</string>
+    <string name="text_29">Your Recommendations are:</string>
     <string name="lorem_ipsum">example</string>
 
 </resources>

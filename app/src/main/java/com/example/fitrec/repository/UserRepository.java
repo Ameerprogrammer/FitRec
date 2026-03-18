@@ -14,7 +14,7 @@ public class UserRepository {
     private final UserApi userApi;
 
     public UserRepository() {
-        userApi = RetrofitClient.getRetrofitInstance().create(UserApi.class);
+        userApi = RetrofitClient.getInstance().create(UserApi.class);
     }
 
     // Example: Get all users

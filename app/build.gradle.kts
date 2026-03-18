@@ -72,5 +72,8 @@ dependencies {
     implementation(libs.retrofit)  // Retrofit library
     implementation(libs.retrofit.gson)  // Gson converter
     implementation(libs.okhttp)  // OkHttp for networking
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 
 }

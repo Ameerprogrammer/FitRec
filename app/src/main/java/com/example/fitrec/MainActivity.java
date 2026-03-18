@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitrec.model.User;
+import com.example.fitrec.network.ApiService;
 import com.example.fitrec.network.RetrofitClient;
 import com.example.fitrec.network.UserApi;
 
@@ -43,17 +44,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchUsers() {
-        UserApi userApi = RetrofitClient.getRetrofitInstance().create(UserApi.class);
-        Call<List<User>> call = userApi.getUsers();
+
+        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+
+        Call<List<User>> call = apiService.getUsers();
 
         call.enqueue(new Callback<List<User>>() {
+
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+
                 if (response.isSuccessful() && response.body() != null) {
+
                     List<User> users = response.body();
+
                     for (User user : users) {
-                        Log.d(TAG, "User: " + user.getName()); // assuming User has getName()
+                        Log.d(TAG, "User: " + user.getName());
                     }
+
                 } else {
                     Log.e(TAG, "API Response failed: " + response.code());
                 }
@@ -61,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e(TAG, "API call failed: " + t.getMessage());
+                Log.e(TAG, "API Call Failed", t);
             }
         });
     }

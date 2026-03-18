@@ -1,12 +1,19 @@
 package com.example.fitrec.network;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import com.example.fitrec.model.User;
+
 import java.util.List;
 
-public interface ApiService {
-    @GET("your-endpoint") // Change "your-endpoint" to the actual API path
-    Call<List<Object>> getItems(); // Change `Object` to your model class
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
 
+public interface ApiService {
+
+    @GET("api/users")
+    Call<List<User>> getUsers();
+
+    @POST("api/users")
+    Call<User> createUser(@Body User user);
 }

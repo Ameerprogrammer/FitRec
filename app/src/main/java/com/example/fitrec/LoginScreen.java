@@ -51,7 +51,32 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void launchCreateProfiles(View v) {
-        //launch a new screen
+
+        android.widget.EditText email = findViewById(R.id.enterEmail);
+        android.widget.EditText password = findViewById(R.id.enterPassword);
+
+        String emailText = email.getText().toString().trim();
+        String passwordText = password.getText().toString().trim();
+
+        // Empty email
+        if (emailText.isEmpty()) {
+            email.setError("Enter email");
+            return;
+        }
+
+        // Invalid email format
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+            email.setError("Invalid email");
+            return;
+        }
+
+        // Empty password
+        if (passwordText.isEmpty()) {
+            password.setError("Enter password");
+            return;
+        }
+
+        // If everything valid → go forward
         Intent i7 = new Intent(this, CreateProfiles.class);
         startActivity(i7);
     }

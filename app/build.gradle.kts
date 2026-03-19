@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.androidTestImplementation
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)

@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="188dp"
+        android:layout_width="200dp"
         android:layout_height="39dp"
         android:background="@drawable/button_outline"
         android:text="@string/text_20"
@@ -22,110 +22,90 @@
         app:layout_constraintVertical_bias="0.628"
         android:onClick="handleComplete"/>
 
-    <EditText
-        android:id="@+id/enterAge"
-        android:layout_width="113dp"
+    <Spinner
+        android:id="@+id/spinnerAge"
+        android:layout_width="135dp"
         android:layout_height="41dp"
         android:background="@drawable/rounded_corner"
-        android:hint="Age?"
-        android:inputType="text"
-        android:paddingLeft="35dp"
+        android:paddingLeft="23dp"
+        android:paddingRight="30dp"
         android:paddingTop="5dp"
-        android:paddingRight="5dp"
         android:paddingBottom="5dp"
-        android:textColor="#3EB489"
-        android:textColorHint="#3EB489"
+        android:popupBackground="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.341" />
 
-    <EditText
-        android:id="@+id/enterStyle"
-        android:layout_width="113dp"
+    <Spinner
+        android:id="@+id/spinnerStyle"
+        android:layout_width="135dp"
         android:layout_height="41dp"
         android:background="@drawable/rounded_corner"
-        android:hint="Style?"
-        android:inputType="text"
-        android:paddingLeft="32dp"
+        android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
-        android:textColor="#3EB489"
-        android:textColorHint="#3EB489"
+        android:popupBackground="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.482" />
 
-    <EditText
-        android:id="@+id/enterGender"
-        android:layout_width="113dp"
+    <Spinner
+        android:id="@+id/spinnerGender"
+        android:layout_width="135dp"
         android:layout_height="41dp"
         android:background="@drawable/rounded_corner"
-        android:hint="Gender?"
-        android:inputType="text"
-        android:paddingLeft="22dp"
+        android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:paddingRight="12dp"
+        android:paddingRight="5dp"
         android:paddingBottom="5dp"
-        android:textColor="#3EB489"
-        android:textColorHint="#3EB489"
+        android:popupBackground="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.274" />
 
-    <EditText
-        android:id="@+id/enterOccasion"
-        android:layout_width="113dp"
+    <Spinner
+        android:id="@+id/spinnerOccasion"
+        android:layout_width="135dp"
         android:layout_height="41dp"
         android:background="@drawable/rounded_corner"
-        android:hint="Occasion?"
-        android:inputType="text"
-        android:paddingLeft="15dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp"
-        android:textColor="#3EB489"
-        android:textColorHint="#3EB489"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/enterBodyType"
-        android:layout_width="113dp"
-        android:layout_height="41dp"
-        android:background="@drawable/rounded_corner"
-        android:hint="Body Type?"
-        android:inputType="text"
-        android:paddingLeft="12dp"
+        android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
-        android:textColor="#3EB489"
-        android:textColorHint="#3EB489"
+        android:popupBackground="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.413"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.553" />
+
+    <Spinner
+        android:id="@+id/spinnerBodyType"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:popupBackground="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.413" />
 
     <TextView
         android:id="@+id/textView4"

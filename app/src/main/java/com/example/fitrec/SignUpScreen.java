@@ -50,6 +50,24 @@ public class SignUpScreen extends AppCompatActivity {
         });
     }
 
+    private boolean isValidEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        if (password.length() < 7)
+            return false;
+
+        // check if it has at least 1 number
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // Add validation here
     public void launchCreateProfiles(View v) {
         // Get user inputs
@@ -57,16 +75,42 @@ public class SignUpScreen extends AppCompatActivity {
         String password = enterPassword.getText().toString().trim();
         String rePassword = reenterPassword.getText().toString().trim();
 
-        // Password match check
-        if (!password.equals(rePassword)) {
-            Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show();
-            return;
+        // Clear previous errors
+        enterEmail.setError(null);
+        enterPassword.setError(null);
+        reenterPassword.setError(null);
+
+        boolean hasError = false;
+
+        // Email check
+        if (email.isEmpty()) {
+            enterEmail.setError("Email is required");
+            hasError = true;
+        } else if (!isValidEmail(email)) {
+            enterEmail.setError("Enter a valid email");
+            hasError = true;
         }
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Bestie, you have to fill in all of the fields", Toast.LENGTH_SHORT).show();
-            return;
+        // Password check
+        if (password.isEmpty()) {
+            enterPassword.setError("Password is required");
+            hasError = true;
+        } else if (!isValidPassword(password)) {
+            enterPassword.setError("Must be 7+ chars & include a number");
+            hasError = true;
         }
+
+        // Re-enter password check
+        if (rePassword.isEmpty()) {
+            reenterPassword.setError("Re-enter your password");
+            hasError = true;
+        } else if (!password.equals(rePassword)) {
+            reenterPassword.setError("Passwords do not match");
+            hasError = true;
+        }
+
+        // STOP if anything failed
+        if (hasError) return;
 
         // If validation passes, launch the CreateProfiles screen
         Intent i6 = new Intent(this, CreateProfiles.class);

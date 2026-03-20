@@ -1,26 +1,83 @@
 package com.example.fitrec.model;
+
 import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 
 public class User implements Serializable {
-    private int id;
-    private String name;
+    private Long id;
+    private String password;
+    private String gender;
+    private int age;
+    private String stylePreferences;
     private String email;
+    private String name;
+    private String bodyType;
+    private String occasion;
 
-    // Constructors
-    public User() {}
-
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
+    // Empty constructor
+    public User() {
     }
 
-    // Getters & Setters
-    public int getId() {
+    // Full constructor
+    public User(String email, String password, String name, String gender,
+                int age, String stylePreferences, String bodyType, String occasion) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.stylePreferences = stylePreferences;
+        this.bodyType = bodyType;
+        this.occasion = occasion;
+    }
+
+    // Getters & Setters for all fields
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getStylePreferences() {
+        return stylePreferences;
+    }
+
+    public void setStylePreferences(String stylePreferences) {
+        this.stylePreferences = stylePreferences;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -31,11 +88,17 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getBodyType() {
+        return bodyType;
+    }
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getOccasion() {
+        return occasion;
+    }
+    public void setOccasion(String occasion) {
+        this.occasion = occasion;
     }
 }

@@ -14,4 +14,7 @@ public interface UserApi {
 
     @POST("users") // Create a new user
     Call<User> createUser(@Body User user);
+
+    @POST("users/login")
+    Call<User> loginUser(@Body User user);
 }

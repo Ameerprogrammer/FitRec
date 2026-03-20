@@ -7,88 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".CreateProfiles">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="39dp"
-        android:background="@drawable/button_outline"
-        android:text="@string/text_20"
+    <EditText
+        android:id="@+id/enterName"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rounded_corner"
+        android:hint="Name?"
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
         android:textColor="#3EB489"
+        android:textColorHint="#3EB489"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.628"
-        android:onClick="handleComplete"/>
-
-    <Spinner
-        android:id="@+id/spinnerAge"
-        android:layout_width="135dp"
-        android:layout_height="41dp"
-        android:background="@drawable/rounded_corner"
-        android:paddingLeft="23dp"
-        android:paddingRight="30dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:popupBackground="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341" />
-
-    <Spinner
-        android:id="@+id/spinnerStyle"
-        android:layout_width="135dp"
-        android:layout_height="41dp"
-        android:background="@drawable/rounded_corner"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        android:popupBackground="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482" />
-
-    <Spinner
-        android:id="@+id/spinnerGender"
-        android:layout_width="135dp"
-        android:layout_height="41dp"
-        android:background="@drawable/rounded_corner"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        android:popupBackground="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.424"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
-
-    <Spinner
-        android:id="@+id/spinnerOccasion"
-        android:layout_width="135dp"
-        android:layout_height="41dp"
-        android:background="@drawable/rounded_corner"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        android:popupBackground="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintVertical_bias="0.269" />
 
     <Spinner
         android:id="@+id/spinnerBodyType"
@@ -102,10 +38,88 @@
         android:popupBackground="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.413" />
+        app:layout_constraintVertical_bias="0.462" />
+
+    <Spinner
+        android:id="@+id/spinnerOccasion"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:popupBackground="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.598" />
+
+    <Spinner
+        android:id="@+id/spinnerAge"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="23dp"
+        android:paddingTop="5dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="5dp"
+        android:popupBackground="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
+
+    <Spinner
+        android:id="@+id/spinnerStyle"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:popupBackground="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:background="@drawable/button_outline"
+        android:onClick="handleComplete"
+        android:text="@string/text_20"
+        android:textColor="#3EB489"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.675" />
+
+    <Spinner
+        android:id="@+id/spinnerGender"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:popupBackground="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
 
     <TextView
         android:id="@+id/textView4"

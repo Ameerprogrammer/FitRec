@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,4 +34,15 @@ public class UserService {
         logger.info("Deleting user with ID: {}", id);
         userRepository.deleteById(id);
     }
+
+    // New method just to find by email (clean separation)
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
 }

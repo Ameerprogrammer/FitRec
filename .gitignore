@@ -1,1 +1,39 @@
+# === IntelliJ / Android Studio ===
+.idea/
 *.iml
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+*.log
+
+# === Android / Java build ===
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+build/
+local.properties   # contains SDK paths
+*.keystore
+*.jks
+
+# === Spring Boot / backend ===
+/backend/build/
+!/backend/src/main/resources/*.properties  # optional if you want it versioned with placeholders
+!backend/src/main/resources/application.yml        # optional if you want it versioned with placeholders
+/backend/src/main/resources/*.properties          # ignore all other properties
+/backend/src/main/resources/*.yml                 # ignore all other YAML configs
+/logs/
+*.h2.db
+*.mv.db
+
+# === Secrets / env variables ===
+.env
+*.env
+*.secret
+
+# === OS / misc ===
+.DS_Store
+Thumbs.db

@@ -8,7 +8,7 @@ material = "1.10.0"
 constraintlayout = "2.1.4"
 navigationFragment = "2.6.0"
 navigationUi = "2.6.0"
-kotlin = "1.9.0"
+kotlin = "1.9.24"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2023.08.00"
@@ -38,4 +38,3 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-

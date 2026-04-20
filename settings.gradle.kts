@@ -1,4 +1,11 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
+    plugins {
+        id("org.jetbrains.kotlin.jvm") version "1.9.0"
+        id("org.jetbrains.kotlin.plugin.spring") version "1.9.0"
+    }
+
     repositories {
         google {
             content {
@@ -9,15 +16,11 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
+        maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://repo.spring.io/snapshot") }
     }
 }
 
 rootProject.name = "FitRec"
 include(":app")
+include(":backend")

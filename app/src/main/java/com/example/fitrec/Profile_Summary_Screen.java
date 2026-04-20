@@ -2,7 +2,10 @@ package com.example.fitrec;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,15 @@ public class Profile_Summary_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile_summary_screen);
+
+        Long userId = getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .getLong("userId", -1);
+
+        if (userId == -1) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+            return;
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -69,5 +81,22 @@ public class Profile_Summary_Screen extends AppCompatActivity {
             return false;
         });
 
+        Button logoutBtn = findViewById(R.id.logoutBtn);
+        logoutBtn.setVisibility(userId != -1 ? View.VISIBLE : View.GONE);
+
+    }
+
+    public void handleLogout(View v) {
+
+        getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .edit()
+                .remove("userId")
+                .apply();
+
+        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 }

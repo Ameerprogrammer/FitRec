@@ -33,6 +33,8 @@ public class CreateProfiles extends AppCompatActivity {
     // email + password from previous screen
     private String email, password;
 
+    private Long userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,16 @@ public class CreateProfiles extends AppCompatActivity {
         // GET DATA FROM SIGNUP SCREEN
         email = getIntent().getStringExtra("email");
         password = getIntent().getStringExtra("password");
+
+        // get userId
+        userId = getIntent().getLongExtra("userId", -1);
+
+        // quick profile existence check
+        String name = getIntent().getStringExtra("name");
+        if (name != null && !name.isEmpty()) {
+            startActivity(new Intent(this, Profile_Summary_Screen.class));
+            finish();
+        }
 
         //null safety check
         if (email == null || password == null) {
@@ -128,6 +140,13 @@ public class CreateProfiles extends AppCompatActivity {
 
     public void handleComplete(View v) {
 
+        // prevent creating duplicate users
+        if (userId != -1) {
+            Toast.makeText(this, "Profile already exists!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(CreateProfiles.this, Profile_Summary_Screen.class));
+            return;
+        }
+
         // prevent spam clicks
         v.setEnabled(false);
 
@@ -195,7 +214,7 @@ public class CreateProfiles extends AppCompatActivity {
         api.createUser(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                v.setEnabled(true); // ✅ re-enable button
+                v.setEnabled(true); // re-enable button
 
                 if (response.isSuccessful()) {
                     Toast.makeText(CreateProfiles.this, "Profile created!", Toast.LENGTH_SHORT).show();
@@ -207,7 +226,7 @@ public class CreateProfiles extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                v.setEnabled(true); // ✅ re-enable button
+                v.setEnabled(true); // re-enable button
                 Toast.makeText(CreateProfiles.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,8 +29,64 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button logoutBtn = findViewById(R.id.logoutBtn);
+
+        // CHECK IF USER IS ALREADY LOGGED IN
+        Long userId = getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .getLong("userId", -1);
+
+        // show only if logged in
+        logoutBtn.setVisibility(userId != -1 ? View.VISIBLE : View.GONE);
+
         // Call API on launch to test connection
         fetchUsers();
+
+        // REPLACED SIMPLE REDIRECT WITH BACKEND CHECK
+        if (userId != -1) {
+
+            UserApi api = RetrofitClient.getRetrofitInstance().create(UserApi.class);
+
+            api.getUserById(userId).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                    if (response.isSuccessful() && response.body() != null) {
+                        User user = response.body();
+
+                        if (user.getName() != null && !user.getName().isEmpty()) {
+                            // profile exists, go to summary
+                            startActivity(new Intent(MainActivity.this, Profile_Summary_Screen.class));
+                        } else {
+                            // profile not complete, go to create profile
+                            Intent i = new Intent(MainActivity.this, CreateProfiles.class);
+
+                            // pass required data
+                            i.putExtra("userId", user.getId());
+                            i.putExtra("email", user.getEmail());
+                            i.putExtra("password", user.getPassword());
+
+                            startActivity(i);
+                        }
+
+                        finish();
+
+                    } else {
+                        // invalid session so clear it
+                        getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                                .edit()
+                                .remove("userId")
+                                .apply();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            return;
+        }
 
         //navigation bar ----------------------------
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
@@ -52,6 +109,23 @@ public class MainActivity extends AppCompatActivity {
         //nav bar ---------------------------------
 
     }
+
+    public void handleLogout(View v) {
+
+        // clear session
+        getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .edit()
+                .remove("userId")
+                .apply();
+
+        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+
+        // go back to entry state
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+    }
+
 
     public void launchSignUp(View v) {
         //launch a new screen

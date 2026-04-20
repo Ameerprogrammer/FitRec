@@ -96,11 +96,30 @@ public class LoginScreen extends AppCompatActivity {
         api.loginUser(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(LoginScreen.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
-                    // If everything valid → go forward
-                    startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                    // Get logged-in user from backend
+                    User loggedInUser = response.body();
+
+                    // Save userId (session)
+                    getSharedPreferences("fitrec_prefs", MODE_PRIVATE).edit().putLong("userId", loggedInUser.getId()).apply();
+
+                    // Go to CreateProfiles instead of MainActivity
+                    Intent i = new Intent(LoginScreen.this, CreateProfiles.class);
+
+                    // Pass ALL user data (INCLUDING ID)
+                    i.putExtra("userId", loggedInUser.getId());
+                    i.putExtra("email", loggedInUser.getEmail());
+                    i.putExtra("password", loggedInUser.getPassword());
+                    i.putExtra("name", loggedInUser.getName());
+                    i.putExtra("gender", loggedInUser.getGender());
+                    i.putExtra("age", loggedInUser.getAge());
+                    i.putExtra("style", loggedInUser.getStylePreferences());
+                    i.putExtra("bodyType", loggedInUser.getBodyType());
+                    i.putExtra("occasion", loggedInUser.getOccasion());
+
+                    startActivity(i);
                     finish();
                 } else {
                     Toast.makeText(LoginScreen.this, "Invalid credentials", Toast.LENGTH_SHORT).show();

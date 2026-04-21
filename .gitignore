@@ -39,3 +39,7 @@ google-services.json
 # GRADLE
 # =========================
 .gradle-cache/
+
+# Gradle problem reports
+problems-report.html
+build/reports/

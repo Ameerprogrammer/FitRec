@@ -2,7 +2,10 @@ package com.example.fitrec;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +37,12 @@ public class Profile_Summary_Screen extends AppCompatActivity {
         String style = intent.getStringExtra("style");
         String occasion = intent.getStringExtra("occasion");
 
+        // safety guard (prevents "null" showing in UI)
+        if (gender == null) gender = "N/A";
+        if (body == null) body = "N/A";
+        if (style == null) style = "N/A";
+        if (occasion == null) occasion = "N/A";
+
         TextView genderView = findViewById(R.id.textView12);
         TextView ageView = findViewById(R.id.textView10);
         TextView bodyView = findViewById(R.id.textView6);
@@ -46,7 +55,6 @@ public class Profile_Summary_Screen extends AppCompatActivity {
         styleView.setText("Style: " + style);
         occasionView.setText("Occasion: " + occasion);
 
-
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         bottomNav.setOnItemSelectedListener(item -> {
 
@@ -58,6 +66,7 @@ public class Profile_Summary_Screen extends AppCompatActivity {
                 startActivity(i);
                 finish(); // close summary screen
                 return true;
+
             } else if (id == R.id.nav_back) {
                 // also go back to create profiles if user wants to edit their stuff
                 Intent i = new Intent(Profile_Summary_Screen.this, CreateProfiles.class);
@@ -69,5 +78,30 @@ public class Profile_Summary_Screen extends AppCompatActivity {
             return false;
         });
 
+        Button logoutBtn = findViewById(R.id.logoutBtn);
+
+        Long userId = getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .getLong("userId", -1);
+
+        // extra safety (prevents crash if button ever missing in layout)
+        if (logoutBtn != null) {
+            logoutBtn.setVisibility(userId != -1 ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    public void handleLogout(View v) {
+
+        getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .edit()
+                .remove("userId")
+                .apply();
+
+        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+
+        // clears activity stack so user can’t go back into session
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
     }
 }

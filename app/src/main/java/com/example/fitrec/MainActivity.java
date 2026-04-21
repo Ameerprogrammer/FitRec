@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +29,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Long userId = getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .getLong("userId", -1);
+
         // Call API on launch to test connection
         fetchUsers();
+
+        // auto-login / routing logic (core session flow)
+        if (userId != -1) {
+
+            UserApi api = RetrofitClient.getRetrofitInstance().create(UserApi.class);
+
+            api.getUserById(userId).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                    if (response.isSuccessful() && response.body() != null) {
+
+                        User user = response.body();
+
+                        if (user.getName() != null && !user.getName().isEmpty()) {
+
+                            // profile complete → go summary screen
+                            startActivity(new Intent(MainActivity.this, Profile_Summary_Screen.class));
+
+                        } else {
+
+                            // profile incomplete → go create profile
+                            Intent i = new Intent(MainActivity.this, CreateProfiles.class);
+
+                            i.putExtra("userId", user.getId());
+                            i.putExtra("email", user.getEmail());
+                            i.putExtra("password", user.getPassword());
+
+                            startActivity(i);
+                        }
+
+                        finish(); // stops back navigation loop
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            return; // prevents rest of UI logic from running when logged in
+        }
 
         //navigation bar ----------------------------
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
@@ -51,6 +98,21 @@ public class MainActivity extends AppCompatActivity {
         });
         //nav bar ---------------------------------
 
+    }
+
+    // logout logic (clears session + resets app state)
+    public void handleLogout() {
+
+        getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                .edit()
+                .remove("userId")
+                .apply();
+
+        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 
     public void launchSignUp(View v) {

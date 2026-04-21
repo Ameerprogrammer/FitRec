@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitrec.model.User;
 import com.example.fitrec.network.RetrofitClient;
 import com.example.fitrec.network.UserApi;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -28,6 +30,27 @@ public class MainActivity extends AppCompatActivity {
 
         // Call API on launch to test connection
         fetchUsers();
+
+        //navigation bar ----------------------------
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
+        bottomNav.setOnItemSelectedListener(item -> {
+
+            int id = item.getItemId();
+
+            if (id == R.id.nav_home) {
+                // Show a toast instead of recreating the activity
+                Toast.makeText(MainActivity.this, "Bestie, you are already at the home screen", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (id == R.id.nav_back) {
+                finish(); // go back
+                return true;
+            }
+
+            return false;
+        });
+        //nav bar ---------------------------------
+
     }
 
     public void launchSignUp(View v) {

@@ -96,12 +96,23 @@ public class LoginScreen extends AppCompatActivity {
         api.loginUser(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
+
+                if (response.isSuccessful() && response.body() != null) {
+
+                    User loggedUser = response.body();
+
+                    // STORE SESSION
+                    getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                            .edit()
+                            .putLong("userId", loggedUser.getId())
+                            .apply();
+
                     Toast.makeText(LoginScreen.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
-                    // If everything valid → go forward
+                    // go to main flow
                     startActivity(new Intent(LoginScreen.this, MainActivity.class));
                     finish();
+
                 } else {
                     Toast.makeText(LoginScreen.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                 }

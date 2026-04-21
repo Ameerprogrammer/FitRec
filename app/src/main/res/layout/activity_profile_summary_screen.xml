@@ -107,6 +107,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.546" />
 
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textColor="#3EB489"
+        android:background="@drawable/button_outline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:onClick="handleLogout"/>
+
 
     <!-- Bottom navigation bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

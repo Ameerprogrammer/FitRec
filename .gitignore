@@ -1,1 +1,41 @@
+# =========================
+# ANDROID STUDIO (STRICT)
+# =========================
+
+.gradle/
+**/.gradle/
+build/
+**/build/
+
+.idea/
 *.iml
+*.iws
+*.ipr
+
+local.properties
+
+# =========================
+# ANDROID CACHE / SYSTEM
+# =========================
+*.apk
+*.aar
+*.dex
+*.class
+
+# =========================
+# LOGS
+# =========================
+*.log
+
+# =========================
+# SECURITY / SECRETS
+# =========================
+google-services.json
+*.jks
+*.keystore
+*.env
+
+# =========================
+# GRADLE
+# =========================
+.gradle-cache/

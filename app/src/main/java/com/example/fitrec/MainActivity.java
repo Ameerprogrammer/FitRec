@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // prevents auto-routing loop when coming back from other screens
+        boolean skipAutoRoute = getIntent().getBooleanExtra("skipAutoRoute", false);
+
         Long userId = getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
                 .getLong("userId", -1);
 
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fetchUsers();
 
         // auto-login / routing logic (core session flow)
-        if (userId != -1) {
+        if (userId != -1 && !skipAutoRoute) {
 
             UserApi api = RetrofitClient.getRetrofitInstance().create(UserApi.class);
 
@@ -44,29 +47,39 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
 
-                    if (response.isSuccessful() && response.body() != null) {
+                    // handle failure/null safely
+                    if (!response.isSuccessful() || response.body() == null) {
 
-                        User user = response.body();
+                        getSharedPreferences("fitrec_prefs", MODE_PRIVATE)
+                                .edit()
+                                .remove("userId")
+                                .apply();
 
-                        if (user.getName() != null && !user.getName().isEmpty()) {
-
-                            // profile complete → go summary screen
-                            startActivity(new Intent(MainActivity.this, Profile_Summary_Screen.class));
-
-                        } else {
-
-                            // profile incomplete → go create profile
-                            Intent i = new Intent(MainActivity.this, CreateProfiles.class);
-
-                            i.putExtra("userId", user.getId());
-                            i.putExtra("email", user.getEmail());
-                            i.putExtra("password", user.getPassword());
-
-                            startActivity(i);
-                        }
-
-                        finish(); // stops back navigation loop
+                        Toast.makeText(MainActivity.this, "Session expired", Toast.LENGTH_SHORT).show();
+                        return;
                     }
+                    User user = response.body();
+
+                    if (user.getName() != null && !user.getName().isEmpty()) {
+
+                        // profile complete → go summary screen
+                        Intent i = new Intent(MainActivity.this, Profile_Summary_Screen.class);
+                        i.putExtra("user", user);
+                        startActivity(i);
+
+                    } else {
+
+                        // profile incomplete → go create profile
+                        Intent i = new Intent(MainActivity.this, CreateProfiles.class);
+
+                        i.putExtra("userId", user.getId());
+                        i.putExtra("email", user.getEmail());
+                        i.putExtra("password", user.getPassword());
+
+                        startActivity(i);
+                    }
+
+                    finish(); // stops back navigation loop
                 }
 
                 @Override

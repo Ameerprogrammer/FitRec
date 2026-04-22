@@ -64,7 +64,19 @@ public class CreateProfiles extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
+
                 Intent i = new Intent(CreateProfiles.this, MainActivity.class);
+
+                User existingUser = (User) getIntent().getSerializableExtra("user");
+
+                if (existingUser != null) {
+                    // restore email/password so it doesn't crash
+                    email = existingUser.getEmail();
+                    password = existingUser.getPassword();
+
+                    // (optional later: prefill UI fields)
+                }
+
                 startActivity(i);
                 finish();
                 return true;
@@ -195,11 +207,19 @@ public class CreateProfiles extends AppCompatActivity {
         api.createUser(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                v.setEnabled(true); // ✅ re-enable button
+                v.setEnabled(true); // re-enable button
 
-                if (response.isSuccessful()) {
-                    Toast.makeText(CreateProfiles.this, "Profile created!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(CreateProfiles.this, Profile_Summary_Screen.class));
+                if (response.isSuccessful() && response.body() != null) {
+
+                    User createdUser = response.body();
+
+                    Intent i = new Intent(CreateProfiles.this, Profile_Summary_Screen.class);
+
+                    i.putExtra("user", createdUser);
+
+                    startActivity(i);
+                    finish();
+
                 } else {
                     Toast.makeText(CreateProfiles.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -207,7 +227,7 @@ public class CreateProfiles extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                v.setEnabled(true); // ✅ re-enable button
+                v.setEnabled(true); // re-enable button
                 Toast.makeText(CreateProfiles.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
